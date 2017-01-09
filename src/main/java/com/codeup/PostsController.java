@@ -31,14 +31,14 @@ public class PostsController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String showEditForm(Model m, @PathVariable long id) {
         Post post = DaoFactory.getPostsDao().find(id);
         m.addAttribute("post", post);
         return "posts/edit";
     }
 
-    @PostMapping("/posts/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String showEditForm(@ModelAttribute Post editedPost, @PathVariable long id) {
         Post existingPost = DaoFactory.getPostsDao().find(id);
         String newTitle = editedPost.getTitle();
@@ -52,14 +52,14 @@ public class PostsController {
         //update record in db
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/{id}")
     public String ShowPost (Model m, @PathVariable long id) {
         Post post = DaoFactory.getPostsDao().find(id);
         m.addAttribute("post", post);
         return "posts/show";
     }
 
-    @PostMapping("/posts/{id}")
+    @PostMapping("/{id}")
     public String DeletePost () {
         return "posts/show";
     }
