@@ -32,9 +32,12 @@ public class HibernatePostsDao implements Posts {
     }
 
     public Post find(long id) {
-        //Post post = (Post) session.get(Post.class, id);
-        //return post;
-        Query query = session.createQuery("");
+        //Transaction tx = session.beginTransaction();
+        Post post;
+        post = session.get(Post.class, id);
+        session.save(post);
+        //tx.commit();
+        return post;
     }
 
     public void update(Post exisitingPost) {
