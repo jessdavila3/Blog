@@ -41,7 +41,7 @@ public class PostsController {
     @PostMapping("/{id}/edit")
     public String showEditForm(@ModelAttribute Post editedPost, @PathVariable long id) {
         Post existingPost = DaoFactory.getPostsDao().find(id);
-        String newTitle = editedPost.getTitle();
+        String newTitle = editedPost.getTitle(); //is this variable being read from the html form?
         String newBody = editedPost.getBody();
         existingPost.setTitle(newTitle);
         existingPost.setBody(newBody);

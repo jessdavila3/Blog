@@ -41,7 +41,9 @@ public class HibernatePostsDao implements Posts {
     }
 
     public void update(Post exisitingPost) {
-
+        Transaction tx = session.beginTransaction();
+        session.update(exisitingPost);
+        tx.commit();
     }
 
     public void delete(long id) {
