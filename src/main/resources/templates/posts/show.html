@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header(${'Blog Post'})">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Post</h1>
+    <div class="blogPosts" th:each="post : ${posts}">
+        <h3>Title: </h3><span th:text="${post.title}">Test</span> <br/>
+        <h3>Body: </h3><span th:text="${post.body}">test body</span>
+    </div>
+
+</div>
+</body>
+</html>
