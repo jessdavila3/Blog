@@ -54,7 +54,8 @@ public class PostsController {
 
     @GetMapping("/posts/{id}")
     public String ShowPost (Model m, @PathVariable long id) {
-        m.addAttribute("posts", id);
+        Post post = DaoFactory.getPostsDao().find(id);
+        m.addAttribute("posts", post);
         return "posts/show";
     }
 
