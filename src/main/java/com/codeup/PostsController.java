@@ -2,8 +2,10 @@ package com.codeup;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,14 @@ public class PostsController {
     }
 
     @PostMapping("/create")
-    public String createNewPost(@ModelAttribute Post post) {
+    public String createNewPost(
+            @ ModelAttribute @Valid Post post,
+            Errors validation,
+            Model model) {
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", post);
+        }
         DaoFactory.getPostsDao().save(post);
         return "redirect:/posts";
     }
@@ -46,18 +55,18 @@ public class PostsController {
         existingPost.setTitle(newTitle);
         existingPost.setBody(newBody);
         DaoFactory.getPostsDao().update(existingPost);
-        return "redirect:/posts/"+existingPost.getId();
+        return "redirect:/posts/" + existingPost.getId();
     }
 
     @GetMapping("/{id}")
-    public String ShowPost (Model m, @PathVariable long id) {
+    public String ShowPost(Model m, @PathVariable long id) {
         Post post = DaoFactory.getPostsDao().find(id);
         m.addAttribute("post", post);
         return "posts/show";
     }
 
     @PostMapping("/{id}/delete")
-    public String DeletePost (@PathVariable long id) {
+    public String DeletePost(@PathVariable long id) {
         Post post = DaoFactory.getPostsDao().find(id);
         DaoFactory.getPostsDao().delete(post);
         return "redirect:/posts";

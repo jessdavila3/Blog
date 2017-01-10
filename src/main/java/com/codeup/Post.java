@@ -24,6 +24,7 @@ public class Post {
     @Column(nullable = false)
     private String title;
 
+    @NotBlank(message = "Body can't be empty")
     @Column(nullable = false)
     private String body;
 

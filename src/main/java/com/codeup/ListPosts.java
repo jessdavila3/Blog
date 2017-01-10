@@ -24,4 +24,19 @@ public class ListPosts implements Posts {
         posts.add(post);
         return null;
     }
+
+    @Override
+    public Post find(long id) {
+        return null;
+    }
+
+    @Override
+    public void update(Post existingPost) {
+
+    }
+
+    @Override
+    public void delete(Post post) {
+
+    }
 }
