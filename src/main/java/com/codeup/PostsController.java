@@ -47,9 +47,6 @@ public class PostsController {
         existingPost.setBody(newBody);
         DaoFactory.getPostsDao().update(existingPost);
         return "redirect:/posts/"+existingPost.getId();
-        // find record in db with id
-        //update fields
-        //update record in db
     }
 
     @GetMapping("/{id}")
@@ -59,9 +56,11 @@ public class PostsController {
         return "posts/show";
     }
 
-    @PostMapping("/{id}")
-    public String DeletePost () {
-        return "posts/show";
+    @PostMapping("/{id}/delete")
+    public String DeletePost (@PathVariable long id) {
+        Post post = DaoFactory.getPostsDao().find(id);
+        DaoFactory.getPostsDao().delete(post);
+        return "redirect:/posts";
     }
 
 }

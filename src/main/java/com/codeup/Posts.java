@@ -12,4 +12,7 @@ public interface Posts {
 
     public List<Post> all();
     public Post save(Post post);
+    public Post find(long id);
+    public void update(Post existingPost);
+    public void delete(Post post);
 }

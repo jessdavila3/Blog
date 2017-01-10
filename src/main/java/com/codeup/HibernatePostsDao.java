@@ -32,21 +32,23 @@ public class HibernatePostsDao implements Posts {
     }
 
     public Post find(long id) {
-        //Transaction tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         Post post;
         post = session.get(Post.class, id);
         session.save(post);
-        //tx.commit();
+        tx.commit();
         return post;
     }
 
-    public void update(Post exisitingPost) {
+    public void update(Post existingPost) {
         Transaction tx = session.beginTransaction();
-        session.update(exisitingPost);
+        session.update(existingPost);
         tx.commit();
     }
 
-    public void delete(long id) {
-
+    public void delete(Post post) {
+        Transaction tx = session.beginTransaction();
+        session.delete(post);
+        tx.commit();
     }
 }
