@@ -44,6 +44,9 @@ public class Post {
     @OneToOne
     private User owner;
 
+    @ManyToOne
+    private User user;
+
     public long getId() {
         return id;
     }
