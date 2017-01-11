@@ -1,5 +1,7 @@
-package com.codeup;
+package com.codeup.controllers;
 
+import com.codeup.DaoFactory;
+import com.codeup.Post;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
