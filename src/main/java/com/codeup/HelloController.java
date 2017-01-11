@@ -13,5 +13,10 @@ public class HelloController {
         return "resume";
     }
 
+    @GetMapping("/")
+    public String welcome() {
+        return "welcome";
+    }
+
 
 }
