@@ -29,12 +29,14 @@ public class PostsController {
 
     @PostMapping("/create")
     public String createNewPost(
-            @ ModelAttribute @Valid Post post,
+            @Valid Post post,
             Errors validation,
-            Model model) {
+            Model model
+    ) {
         if (validation.hasErrors()) {
             model.addAttribute("errors", validation);
             model.addAttribute("post", post);
+            return "posts/create";
         }
         DaoFactory.getPostsDao().save(post);
         return "redirect:/posts";
