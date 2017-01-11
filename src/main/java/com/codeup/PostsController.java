@@ -1,5 +1,6 @@
 package com.codeup;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -29,7 +30,7 @@ public class PostsController {
 
     @PostMapping("/create")
     public String createNewPost(
-            @Valid Post post,
+            @Valid Post post, //does this need a modelAttribute tag?
             Errors validation,
             Model model
     ) {
@@ -38,6 +39,8 @@ public class PostsController {
             model.addAttribute("post", post);
             return "posts/create";
         }
+        //User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //post.setUser(loggedInUser);
         DaoFactory.getPostsDao().save(post);
         return "redirect:/posts";
     }
