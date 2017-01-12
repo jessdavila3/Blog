@@ -3,6 +3,7 @@
 <head th:replace="fragments/header :: header(${'Blog Post'})">
 </head>
 <body>
+<div th:replace="fragments/navbar"></div>
 <div class="container">
     <h1 class="text-center">Post</h1>
     <div class="blogPosts" th:each="post : ${post}">
