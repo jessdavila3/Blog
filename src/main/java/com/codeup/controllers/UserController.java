@@ -36,18 +36,18 @@ public class UserController {
 
     @PostMapping("/create")
     public String createUser(
-            @ModelAttribute User user
-            //Errors validation,
-            //Model model
+            @Valid User user,
+            Errors validation,
+            Model model
     ) {
-//        if (validation.hasErrors()) {
-//            model.addAttribute("errors", validation);
-//            model.addAttribute("user", user);
-//            return "user/create";
-//        }
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "user/create";
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/posts";
+        return "redirect:/login";
     }
 
 
