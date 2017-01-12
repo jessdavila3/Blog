@@ -20,8 +20,8 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-//    @Autowired
-//    public Users usersDao;
+    @Autowired
+    public Users usersDao;
 
     @GetMapping("/create")
     public String showRegisterPage(Model model) {
@@ -35,8 +35,13 @@ public class UserController {
             Errors validation,
             Model model
     ) {
-
-        return "redirect:../posts";
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("user", user);
+            return "user/create";
+        }
+        usersDao.save(user);
+        return "redirect:/posts";
     }
 
 
