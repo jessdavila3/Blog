@@ -45,7 +45,7 @@ public class PostsController {
             model.addAttribute("post", post);
             return "posts/create";
         }
-        //User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //postsDao.setUser();
         DaoFactory.getPostsDao().save(post);
         return "redirect:/posts";
