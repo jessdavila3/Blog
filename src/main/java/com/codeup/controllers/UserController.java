@@ -27,7 +27,7 @@ public class UserController {
 
     @PostMapping("/create")
     public String createUser() {
-        return "posts/index";
+        return "redirect:../posts";
     }
 
 
