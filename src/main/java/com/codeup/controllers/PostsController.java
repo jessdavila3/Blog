@@ -2,6 +2,10 @@ package com.codeup.controllers;
 
 import com.codeup.DaoFactory;
 import com.codeup.Post;
+import com.codeup.Posts;
+import com.codeup.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +46,7 @@ public class PostsController {
             return "posts/create";
         }
         //User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //post.setUser(loggedInUser);
+        //postsDao.setUser();
         DaoFactory.getPostsDao().save(post);
         return "redirect:/posts";
     }

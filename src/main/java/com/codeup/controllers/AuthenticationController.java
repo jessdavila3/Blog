@@ -12,9 +12,15 @@ import javax.validation.Valid;
 @Controller
 public class AuthenticationController {
     @GetMapping("/login")
-    public String showLoginForm() {
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new User());
         return "users/login";
     }
+
+//    @PostMapping("/login")
+//    public String login() {
+//
+//    }
 
 //    @GetMapping("/register")
 //    public String showRegisterForm(Model m) {
