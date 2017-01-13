@@ -1,6 +1,5 @@
 package com.codeup.controllers;
 
-import com.codeup.DaoFactory;
 import com.codeup.Post;
 import com.codeup.Posts;
 import com.codeup.User;
@@ -40,7 +39,7 @@ public class PostsController extends BaseController {
 
     @PostMapping("/create")
     public String createNewPost(
-            @Valid Post post, //does this need a modelAttribute tag?
+            @Valid Post post,
             Errors validation,
             Model model
     ) {
@@ -56,8 +55,7 @@ public class PostsController extends BaseController {
 
     @GetMapping("/{id}/edit")
     public String showEditForm(Model m, @PathVariable long id) {
-        Post post = DaoFactory.getPostsDao().find(id);
-        m.addAttribute("post", post);
+        m.addAttribute("post", postsDao.findOne(id));
         return "posts/edit";
     }
 
@@ -69,7 +67,9 @@ public class PostsController extends BaseController {
             m.addAttribute("post", editedPost);
             return "posts/edit";
         }
+
         Post existingPost = postsDao.findOne(id);
+
         if (existingPost.getUser().getId().equals(loggedInUser().getId())) {
             return "redirect:/posts";
         }
@@ -82,7 +82,6 @@ public class PostsController extends BaseController {
     @GetMapping("/{id}")
     public String showPost(Model m, @PathVariable long id) {
         Post existingPost = postsDao.findOne(id);
-
         m.addAttribute("post", existingPost);
 
         return "posts/show";
