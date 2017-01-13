@@ -71,4 +71,13 @@ public class Post {
         this.body = body;
     }
 
+    public Post() {}
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
